@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { reactive, watch } from "vue";
 import connectMetamask from '/connectMetamask'
 
 const defaultState = {
@@ -11,15 +11,32 @@ const STATE_NAME = 'useState'
 const getDefaultState = () => {
     if (localStorage.getItem(STATE_NAME) !== null) {
         return JSON.parse(localStorage.getItem(STATE_NAME))
+    }
 
-const state = reactive(defaultState);
+    return defaultState
+}
+
+
+const state = reactive(getDefaultState);
 
 const actions = {
     connectMetamask
 }
 
-export default  => {
+watch(
+    () => state,
+    () => {
+        localStorage.setItem(STATE_NAME, JSON.stringify(state))
+    }
+)
 
+export default () => {
+    if (localStorage.getItem(STATE_NAME) === null) {
+        localStorage.setItem(STATE_NAME, JSON.stringify(defaultState))
+    }
+    return {
+        
+    }
     state,
     ...actions
 }
