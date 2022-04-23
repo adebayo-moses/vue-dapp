@@ -1,20 +1,18 @@
-<script setup>
-import connect from '../composables/index'
-
+<script>
+import connect from '../composables/index';
 export default {
   name: 'ConnectWallet',
   setup: () => {
-    const {connectMetamsk, state} = connect();
-console.log(state)
-    const connectMetamask = async () => {
-    await connectMetamsk();
-  };
-
-  return {
-    connectMetamask,
-    state
+    const { connectMetamask, state } = connect();
+    console.log(state)
+    const connectMetamaskWallet = async () => {
+      await connectMetamask();
+    };
+    return {
+      connectMetamaskWallet,
+      state
+    }
   }
-}
 }
 </script>
 
