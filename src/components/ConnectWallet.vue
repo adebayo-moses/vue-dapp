@@ -1,10 +1,21 @@
 <script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
+import connect from '../composables/index'
+
+export default {
+  name: 'ConnectWallet',
+  setup: () => {
+    const {connectMetamsk, state} = connect();
+console.log(state)
+    const connectMetamask = async () => {
+    await connectMetamsk();
+  };
+
+  return {
+    connectMetamask,
+    state
   }
-})
+}
+}
 </script>
 
 <template>

@@ -15,7 +15,10 @@ const connectMetamask = async () => {
             })
             console.log("Connected" accounts[0])
             const provider = await ethers.providers.Web3Provider(ethereum);
-            const signer = provider.getSigner();
+            const signer = await provider.getSigner();
+            console("signer", signer);
+            state.address = accounts[0];
+            states.status = true
             }
             catch (error){
                 console.log(error)
@@ -23,6 +26,8 @@ const connectMetamask = async () => {
 
             }
     }
+
+    export default connectMetamask;
         // const provider = new ethers.providers.Web3Provider(window.web3.currentProvider);
         // const signer = provider.getSigner();
         // const address = await signer.getAddress();
